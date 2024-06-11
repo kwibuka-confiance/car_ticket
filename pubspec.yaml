@@ -19,6 +19,20 @@ dependencies:
   firebase_analytics: ^10.10.2
   equatable: ^2.0.5
   flutter_bloc: ^8.1.5
+  get: ^4.6.6
+  shared_preferences: ^2.2.3
+  gap: ^3.0.1
+  google_fonts: ^6.2.1
+  image_picker: ^1.1.1
+  uuid: ^4.4.0
+  flutter_stripe: ^10.1.1
+  qr_code_scanner: ^1.0.1
+  http: ^1.2.1
+  flutter_dotenv: ^5.1.0
+  fluttertoast: ^8.2.5
+  qr_flutter: ^4.1.0
+  screenshot: ^2.5.0
+  file_saver: ^0.2.13
 
 dev_dependencies:
   flutter_test:
@@ -29,6 +43,7 @@ flutter:
   assets:
     - assets/images/car_image.png
     - assets/images/excel_coaster.png
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

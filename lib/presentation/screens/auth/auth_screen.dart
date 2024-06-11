@@ -1,10 +1,6 @@
-import 'package:car_ticket/domain/repositories/user/user_repository.dart';
-import 'package:car_ticket/presentation/bloc/sign_in_bloc/sign_in_bloc.dart';
-import 'package:car_ticket/presentation/bloc/sign_up_bloc/sign_up_bloc.dart';
 import 'package:car_ticket/presentation/screens/auth/login_form.dart';
 import 'package:car_ticket/presentation/screens/auth/signup_form.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthScreen extends StatefulWidget {
   static const String routeName = '/auth';
@@ -27,8 +23,8 @@ class _AuthScreenState extends State<AuthScreen>
 
   @override
   Widget build(BuildContext context) {
-    final authSwitcherWidth = MediaQuery.of(context).size.width * 0.6;
-
+    final isKeyboard = MediaQuery.of(context).viewInsets.bottom > 0;
+    final loginHeight = MediaQuery.of(context).size.height * 0.67;
     return Scaffold(
       body: Stack(
         children: [
@@ -52,7 +48,9 @@ class _AuthScreenState extends State<AuthScreen>
             ),
           ),
           Positioned(
-            bottom: 0,
+            bottom: isKeyboard
+                ? MediaQuery.of(context).viewInsets.bottom - loginHeight
+                : 0,
             child: Container(
               height: MediaQuery.of(context).size.height * 0.7,
               width: MediaQuery.of(context).size.width,
@@ -85,21 +83,12 @@ class _AuthScreenState extends State<AuthScreen>
                     ], controller: _tabController),
                     const SizedBox(height: 20),
                     Expanded(
-                        child:
-                            TabBarView(controller: _tabController, children: [
-                      BlocProvider<SignInBloc>(
-                        create: (context) => SignInBloc(
-                          userRepository: context.read<UserRepository>(),
-                        ),
-                        child: const LoginForm(),
-                      ),
-                      BlocProvider<SignUpBloc>(
-                        create: (context) => SignUpBloc(
-                          userRepository: context.read<UserRepository>(),
-                        ),
-                        child: const SignUpForm(),
-                      )
-                    ]))
+                        child: TabBarView(
+                            controller: _tabController,
+                            children: const [
+                          LoginForm(),
+                          SignUpForm(),
+                        ]))
                   ],
                 ),
               ),

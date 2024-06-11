@@ -1,7 +1,8 @@
-import 'package:car_ticket/presentation/screens/main_screen/navigations.dart';
+import 'package:car_ticket/controller/auth/login_controller.dart';
 import 'package:car_ticket/presentation/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -25,6 +26,7 @@ class _LoginFormState extends State<LoginForm> {
         child: Column(
           children: [
             TextFormField(
+              controller: emailController,
               decoration: const InputDecoration(labelText: 'Email'),
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
@@ -36,6 +38,7 @@ class _LoginFormState extends State<LoginForm> {
               },
             ),
             TextFormField(
+              controller: passwordController,
               obscureText: true,
               keyboardType: TextInputType.visiblePassword,
               decoration: const InputDecoration(labelText: 'Password'),
@@ -48,12 +51,22 @@ class _LoginFormState extends State<LoginForm> {
               },
             ),
             SizedBox(height: 50.h),
-            MainButton(
-                isColored: true,
-                onPressed: () {
-                  Navigator.pushNamed(context, Navigations.routeName);
-                },
-                title: "Login")
+            GetBuilder(
+                init: LoginController(),
+                builder: (LoginController controller) {
+                  return MainButton(
+                      isColored: true,
+                      isLoading: controller.isSigningIn,
+                      isDisabled: controller.isSigningIn,
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          controller.login(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim());
+                        }
+                      },
+                      title: "Login");
+                })
           ],
         ),
       ),

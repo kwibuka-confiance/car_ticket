@@ -10,5 +10,11 @@ abstract class UserRepository {
 
   Future<void> signOut();
 
-  Future<void> setUserData(MyUser user);
+  Future<void> setUserData({required MyUser user});
+
+  Future<void> updateUserData({required MyUser user});
+
+  Future<MyUser> getUserData();
+
+  Future<void> updateProfilePhoto({required String photoUrl});
 }
