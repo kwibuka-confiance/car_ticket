@@ -22,12 +22,14 @@ abstract class PaymentRepository {
   String calculateAmount(String price);
   Future<void> saveCustomerPaymentsInDb(UserPayment userPayment);
   Future<void> createTicket(
-      String carId,
-      List<Seat> carSeats,
-      String destinationId,
-      String carDestinationFromTime,
-      String carDestinationToTime);
+      {required String carId,
+      required List<Seat> carSeats,
+      required String destinationId,
+      required String ticketAmount,
+      required String carDestinationFromTime,
+      required String carDestinationToTime});
   Future<List<ExcelTicket>> getTickets();
+  Future<List<ExcelTicket>> getMyTickets({required String userId});
   Future<void> updateTicket(ExcelTicket ticket);
 
   Future<List<UserPayment>> getCustomerPayments(String userId);

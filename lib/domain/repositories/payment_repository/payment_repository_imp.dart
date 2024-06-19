@@ -84,8 +84,13 @@ class PaymentRepositoryImpl extends PaymentRepository {
       );
       await saveCustomerPaymentsInDb(userPayment);
       await carRepository.updateCarSeatsBooked(carId, carSeats);
-      await createTicket(carId, carSeats, destinationId, carDestinationFromTime,
-          carDestinationToTime);
+      await createTicket(
+          carId: carId,
+          carSeats: carSeats,
+          destinationId: destinationId,
+          carDestinationFromTime: carDestinationFromTime,
+          carDestinationToTime: carDestinationToTime,
+          ticketAmount: result.amount.toString());
       Get.offNamed(PaymentSuccessScreen.routeName);
     } on Exception catch (e) {
       if (e is StripeException) {
@@ -169,11 +174,12 @@ class PaymentRepositoryImpl extends PaymentRepository {
 
   @override
   Future<void> createTicket(
-      String carId,
-      List<Seat> carSeats,
-      String destinationId,
-      String carDestinationFromTime,
-      String carDestinationToTime) async {
+      {required String carId,
+      required List<Seat> carSeats,
+      required String destinationId,
+      required String carDestinationFromTime,
+      required String ticketAmount,
+      required String carDestinationToTime}) async {
     try {
       final user = await sharedPreferenceRepository.getUser();
       Uuid uuid = const Uuid();
@@ -188,6 +194,8 @@ class PaymentRepositoryImpl extends PaymentRepository {
         isUsed: false,
         carDestinationFromTime: carDestinationFromTime,
         carDestinationToTime: carDestinationToTime,
+        createdAt: DateTime.now(),
+        price: ticketAmount,
       );
 
       await _ticketsCollection.doc(ticket.id).set(ticket.toDocument());
@@ -202,6 +210,19 @@ class PaymentRepositoryImpl extends PaymentRepository {
       final user = await sharedPreferenceRepository.getUser();
       final response =
           await _ticketsCollection.where('userId', isEqualTo: user.id).get();
+      return response.docs
+          .map((e) => ExcelTicket.fromDocument(e.data()))
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<ExcelTicket>> getMyTickets({required String userId}) async {
+    try {
+      final response =
+          await _ticketsCollection.where('userId', isEqualTo: userId).get();
       return response.docs
           .map((e) => ExcelTicket.fromDocument(e.data()))
           .toList();

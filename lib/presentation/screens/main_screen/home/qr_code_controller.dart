@@ -35,9 +35,11 @@ class QRcodeController extends GetxController {
         if (ticket.carId == result.code && !ticket.isExpired) {
           final updateTicket = ticket.copyWith(isExpired: true, isUsed: true);
           await paymentRepository.updateTicket(updateTicket);
-          Get.to(() => const QrCodeResultScreen(isSuccessful: true));
+          Get.to(() =>
+              QrCodeResultScreen(isSuccessful: true, ticketsList: ticketsList));
         } else {
-          Get.to(() => const QrCodeResultScreen(isSuccessful: false));
+          Get.to(() =>
+              QrCodeResultScreen(isSuccessful: true, ticketsList: ticketsList));
         }
       }
       isVerifying = false;
@@ -57,14 +59,12 @@ class QRcodeController extends GetxController {
   }
 
   getTickets() async {
-    print('Getting tickets');
     try {
       isVerifying = true;
       update();
       List<ExcelTicket> tickets = [];
       tickets = await paymentRepository.getTickets();
       ticketsList = tickets;
-      print('Tickets: $ticketsList');
       isVerifying = false;
       update();
     } catch (e) {

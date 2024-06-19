@@ -11,6 +11,8 @@ class ExcelTicket {
   String carDestinationToTime;
   bool isExpired;
   bool isUsed;
+  String price;
+  DateTime? createdAt;
 
   ExcelTicket({
     required this.id,
@@ -23,6 +25,8 @@ class ExcelTicket {
     required this.carDestinationToTime,
     required this.isExpired,
     required this.isUsed,
+    required this.price,
+    this.createdAt,
   });
 
   ExcelTicket copyWith({
@@ -36,6 +40,8 @@ class ExcelTicket {
     String? carDestinationToTime,
     bool? isExpired,
     bool? isUsed,
+    String? price,
+    DateTime? createdAt,
   }) {
     return ExcelTicket(
       id: id ?? this.id,
@@ -49,6 +55,8 @@ class ExcelTicket {
       carDestinationToTime: carDestinationToTime ?? this.carDestinationToTime,
       isExpired: isExpired ?? this.isExpired,
       isUsed: isUsed ?? this.isUsed,
+      price: price ?? this.price,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 
@@ -64,6 +72,8 @@ class ExcelTicket {
       'isUsed': isUsed,
       'carDestinationFromTime': carDestinationFromTime,
       'carDestinationToTime': carDestinationToTime,
+      'createdAt': createdAt ?? DateTime.now(),
+      'price': price,
     };
   }
 
@@ -81,6 +91,8 @@ class ExcelTicket {
       isUsed: document['isUsed'],
       carDestinationFromTime: document['carDestinationFromTime'],
       carDestinationToTime: document['carDestinationToTime'],
+      createdAt: document['createdAt'].toDate(),
+      price: document['price'],
     );
   }
 
@@ -95,5 +107,7 @@ class ExcelTicket {
     carDestinationToTime: '',
     isExpired: false,
     isUsed: false,
+    createdAt: DateTime.now(),
+    price: '',
   );
 }

@@ -10,7 +10,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.6
-  flutter_screenutil: ^5.9.0
+  flutter_screenutil: ^5.9.3
   firebase_core: ^2.30.0
   firebase_auth: ^4.19.2
   cloud_firestore: ^4.17.0
@@ -18,7 +18,6 @@ dependencies:
   firebase_messaging: ^14.8.2
   firebase_analytics: ^10.10.2
   equatable: ^2.0.5
-  flutter_bloc: ^8.1.5
   get: ^4.6.6
   shared_preferences: ^2.2.3
   gap: ^3.0.1
@@ -33,6 +32,7 @@ dependencies:
   qr_flutter: ^4.1.0
   screenshot: ^2.5.0
   file_saver: ^0.2.13
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -43,6 +43,8 @@ flutter:
   assets:
     - assets/images/car_image.png
     - assets/images/excel_coaster.png
+    - assets/images/seat 2.svg
+    - assets/images/black_car.png
     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,5 +1,6 @@
 import 'package:car_ticket/presentation/screens/main_screen/home/qr_code_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -19,24 +20,24 @@ class ScanQrCodeScreen extends StatelessWidget {
             return Container(
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 120,
+                  SizedBox(
+                    height: 120.h,
                   ),
                   const Center(
                     child: Text('Scan QR Code to get started'),
                   ),
-                  const SizedBox(
-                    height: 40,
+                  SizedBox(
+                    height: 40.h,
                   ),
                   Container(
-                    width: 300,
-                    height: 300,
+                    width: 300.w,
+                    height: 300.h,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: Colors.black,
                         width: 2,
                       ),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
                     child: QRView(
                         key: qrController.qrKey,

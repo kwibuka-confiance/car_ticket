@@ -2,6 +2,7 @@ import 'package:car_ticket/controller/home/destinations.dart';
 import 'package:car_ticket/presentation/screens/main_screen/dashboard/destination/add_destination.dart';
 import 'package:car_ticket/presentation/screens/main_screen/home/car_availability_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
@@ -23,7 +24,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         SafeArea(
                           child: Container(
-                            padding: const EdgeInsets.only(top: 50),
+                            padding: EdgeInsets.only(top: 50.h),
                             child: const Text('Excel tours',
                                 style: TextStyle(
                                     color: Colors.white,
@@ -36,92 +37,92 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                    top: 140,
-                    right: 20,
+                    top: 140.h,
+                    right: 20.w,
                     child: TextButton.icon(
                         onPressed: () {
                           SearchAlert.show(context);
                         },
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.filter_alt_outlined,
                           color: Colors.white,
-                          size: 30,
+                          size: 30.sp,
                         ),
-                        label: const Text("Filter",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 18)))),
+                        label: Text("Filter",
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 18.sp)))),
                 Positioned(
-                    top: 140,
-                    left: 20,
+                    top: 140.h,
+                    left: 20.w,
                     child: !homeController.isAllDestinationsShown
                         ? TextButton.icon(
                             onPressed: () async {
                               homeController.showAllDestinations();
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.clear_all_rounded,
                               color: Colors.white,
-                              size: 30,
+                              size: 30.r,
                             ),
-                            label: const Text("Show all",
+                            label: Text("Show all",
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 18)))
+                                    color: Colors.white, fontSize: 18.sp)))
                         : const SizedBox()),
                 Positioned(
                   bottom: 0,
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.7,
+                    height: MediaQuery.of(context).size.height * 0.63.h,
                     width: MediaQuery.of(context).size.width,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                        topLeft: Radius.circular(30.r),
+                        topRight: Radius.circular(30.r),
                       ),
                     ),
                     child: Container(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Container(
-                              margin:
-                                  const EdgeInsets.only(top: 40, bottom: 20),
-                              child: const Text('Select your destination',
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black)),
-                            ),
-                            // switch
-                            homeController.isGettingDestinations
-                                ? const SizedBox(
-                                    height: 400,
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  )
-                                : homeController.destinations.isEmpty
-                                    ? const SizedBox(
-                                        height: 400,
-                                        child: Center(
-                                          child:
-                                              Text("No destinations available"),
-                                        ),
-                                      )
-                                    : ListView.builder(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 10),
-                                        itemCount:
-                                            homeController.destinations.length,
-                                        shrinkWrap: true,
-                                        itemBuilder: (context, index) =>
-                                            CarAvailability(
-                                              destination: homeController
-                                                  .destinations
-                                                  .elementAt(index),
-                                            ))
-                          ],
-                        ),
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: 40.h, bottom: 20.h),
+                            child: const Text('Select your destination',
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black)),
+                          ),
+                          // switch
+                          homeController.isGettingDestinations
+                              ? SizedBox(
+                                  height: 400.h,
+                                  child: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                )
+                              : homeController.destinations.isEmpty
+                                  ? SizedBox(
+                                      height: 400.h,
+                                      child: const Center(
+                                        child:
+                                            Text("No destinations available"),
+                                      ),
+                                    )
+                                  : SizedBox(
+                                      height: 430.h,
+                                      child: ListView.builder(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 20.w, vertical: 10.h),
+                                          itemCount: homeController
+                                              .destinations.length,
+                                          shrinkWrap: true,
+                                          itemBuilder: (context, index) =>
+                                              CarAvailability(
+                                                destination: homeController
+                                                    .destinations
+                                                    .elementAt(index),
+                                              )),
+                                    )
+                        ],
                       ),
                     ),
                   ),
@@ -148,10 +149,10 @@ class SearchAlert {
                   children: [
                     const Text(
                         "Choose a date you want to travel and also select the your destination to get the available cars."),
-                    const Gap(20),
+                    Gap(20.h),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       decoration: BoxDecoration(
                           border: Border.all(
                               color: Colors.grey.shade400,
@@ -179,7 +180,7 @@ class SearchAlert {
                             child: Row(
                               children: [
                                 CircleAvatar(
-                                  radius: 14,
+                                  radius: 14.r,
                                   backgroundColor:
                                       Theme.of(context).colorScheme.secondary,
                                   foregroundColor: Colors.white,
@@ -190,8 +191,8 @@ class SearchAlert {
                                         fontWeight: FontWeight.w600),
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 10,
+                                SizedBox(
+                                  width: 10.w,
                                 ),
                                 Text(
                                   value.name,
@@ -205,7 +206,7 @@ class SearchAlert {
                     const Gap(10),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       decoration: BoxDecoration(
                           border: Border.all(
                               color: Colors.grey.shade400,
@@ -245,8 +246,8 @@ class SearchAlert {
                                         fontWeight: FontWeight.w600),
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 10,
+                                SizedBox(
+                                  width: 10.w,
                                 ),
                                 Text(
                                   value.hourValue,

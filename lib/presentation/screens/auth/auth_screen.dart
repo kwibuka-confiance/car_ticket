@@ -24,8 +24,8 @@ class _AuthScreenState extends State<AuthScreen>
   @override
   Widget build(BuildContext context) {
     final isKeyboard = MediaQuery.of(context).viewInsets.bottom > 0;
-    final loginHeight = MediaQuery.of(context).size.height * 0.67;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Container(
@@ -48,9 +48,7 @@ class _AuthScreenState extends State<AuthScreen>
             ),
           ),
           Positioned(
-            bottom: isKeyboard
-                ? MediaQuery.of(context).viewInsets.bottom - loginHeight
-                : 0,
+            bottom: isKeyboard ? MediaQuery.of(context).viewInsets.bottom : 0,
             child: Container(
               height: MediaQuery.of(context).size.height * 0.7,
               width: MediaQuery.of(context).size.width,

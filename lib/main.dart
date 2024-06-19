@@ -12,6 +12,7 @@ import 'package:car_ticket/presentation/screens/main_screen/navigations.dart';
 import 'package:car_ticket/presentation/screens/onboarding/onboard_screen.dart';
 import 'package:car_ticket/presentation/screens/setting_screens/edit_profile.dart';
 import 'package:car_ticket/presentation/screens/setting_screens/my_payment.dart';
+import 'package:car_ticket/presentation/screens/setting_screens/my_tickets.dart';
 import 'package:car_ticket/presentation/screens/status_screen/success_payment_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -82,6 +83,7 @@ class MyApp extends StatelessWidget {
                 PaymentSuccessScreen.routeName: (context) =>
                     const PaymentSuccessScreen(),
                 PaymentsScreen.routeName: (context) => const PaymentsScreen(),
+                MyTicketScreen.routeName: (context) => const MyTicketScreen(),
               });
         });
   }

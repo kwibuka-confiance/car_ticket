@@ -1,6 +1,7 @@
 import 'package:car_ticket/controller/setting/setting_controller.dart';
 import 'package:car_ticket/presentation/screens/setting_screens/edit_profile.dart';
 import 'package:car_ticket/presentation/screens/setting_screens/my_payment.dart';
+import 'package:car_ticket/presentation/screens/setting_screens/my_tickets.dart';
 import 'package:car_ticket/presentation/widgets/user_profile_picture.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -111,10 +112,10 @@ class SettingsItems {
           Get.toNamed(MyPayments.routeName);
         }),
     SettingsItems(
-        title: "Reports",
+        title: "Tickets",
         icon: Icons.description_outlined,
         onTap: () {
-          // Navigator.pushNamed(context, HelpScreen.routeName);
+          Get.toNamed(MyTicketScreen.routeName);
         }),
     SettingsItems(title: "Logout", icon: Icons.logout, onTap: () {}),
   ];
