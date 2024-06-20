@@ -110,4 +110,73 @@ class ExcelTicket {
     createdAt: DateTime.now(),
     price: '',
   );
+
+  static List<ExcelTicket> testingTickets = [
+    ExcelTicket(
+      id: '1',
+      carId: '1',
+      destinationId: '1',
+      userId: '1',
+      seatNumbers: '',
+      seats: [
+        Seat(
+          id: 1,
+          seatNumber: '1',
+          isBooked: false,
+          isReserved: false,
+        ),
+        Seat(
+          id: 2,
+          seatNumber: '2',
+          isBooked: false,
+          isReserved: false,
+        ),
+        Seat(
+          id: 3,
+          seatNumber: '3',
+          isBooked: false,
+          isReserved: false,
+        ),
+      ],
+      carDestinationFromTime: '10:00 AM',
+      carDestinationToTime: '11:00 AM',
+      isExpired: true,
+      isUsed: false,
+      price: '5000',
+      createdAt: DateTime.now(),
+    ),
+    ExcelTicket(
+      id: '2',
+      carId: '2',
+      destinationId: '2',
+      userId: '2',
+      seatNumbers: '4,5,6',
+      seats: [
+        Seat(
+          id: 4,
+          seatNumber: '4',
+          isBooked: false,
+          isReserved: false,
+        ),
+        Seat(
+          id: 5,
+          seatNumber: '5',
+          isBooked: false,
+          isReserved: false,
+        ),
+        Seat(
+          id: 6,
+          seatNumber: '6',
+          isBooked: false,
+          isReserved: false,
+        ),
+      ],
+      carDestinationFromTime: '12:00 PM',
+      carDestinationToTime: '1:00 PM',
+      isExpired: false,
+      isUsed: false,
+      price: '5000',
+      createdAt: DateTime.now(),
+    ),
+  ];
 }

@@ -119,9 +119,7 @@ class PaymentRepositoryImpl extends PaymentRepository {
               paymentSheetParameters: SetupPaymentSheetParameters(
             paymentIntentClientSecret: paymentIntent!['client_secret'],
             billingDetails: BillingDetails(
-              email: user.email,
-              name: user.name,
-            ),
+                email: user.email, name: user.name, address: null),
             style: ThemeMode.light,
             merchantDisplayName: 'Car Ticket',
             allowsDelayedPaymentMethods: true,

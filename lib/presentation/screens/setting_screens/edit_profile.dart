@@ -57,8 +57,7 @@ class UserProfileScreen extends StatelessWidget {
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: const Color.fromARGB(
-                                        255, 215, 215, 215),
+                                    color: const Color.fromARGB(255, 124, 4, 4),
                                     border: const Border.fromBorderSide(
                                         BorderSide(
                                             color: Colors.white, width: 2)),

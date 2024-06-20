@@ -1,4 +1,7 @@
 List<String> seatsLength(String tickets) {
+  if (tickets.isEmpty) {
+    return [];
+  }
   return tickets.split(',');
 }
 

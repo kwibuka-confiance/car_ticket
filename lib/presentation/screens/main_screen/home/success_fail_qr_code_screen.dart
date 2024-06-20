@@ -1,16 +1,22 @@
+import 'package:car_ticket/controller/home/qr_code_controller.dart';
 import 'package:car_ticket/controller/navigation.dart';
 import 'package:car_ticket/domain/models/ticket/ticket.dart';
 import 'package:car_ticket/domain/usecases/helpers/seats_length.dart';
-import 'package:car_ticket/presentation/screens/main_screen/home/qr_code_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class QrCodeResultScreen extends StatelessWidget {
   final bool isSuccessful;
-  final List<ExcelTicket> ticketsList;
+  final ExcelTicket ticket;
+  final String title;
+  final String content;
   const QrCodeResultScreen(
-      {required this.isSuccessful, required this.ticketsList, super.key});
+      {required this.isSuccessful,
+      required this.ticket,
+      super.key,
+      required this.title,
+      required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +27,18 @@ class QrCodeResultScreen extends StatelessWidget {
         title: const Text('QR Code Result'),
       ),
       body: GetBuilder(builder: (NavigationController navController) {
-        List<String> tickets = seatsLength(ticketsList[2].seatNumbers);
+        List<String> tickets = seatsLength(ticket.seatNumbers);
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 isSuccessful ? Icons.check_circle : Icons.cancel,
-                color: isSuccessful ? Colors.green : Colors.red,
+                color: isSuccessful ? Colors.green : Colors.orange,
                 size: 100,
               ),
               Text(
-                isSuccessful ? 'Success' : 'Failed',
+                title,
                 style: const TextStyle(fontSize: 20),
               ),
               const SizedBox(
@@ -41,9 +47,7 @@ class QrCodeResultScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Text(
-                  isSuccessful
-                      ? 'Your ticket(s) have been successfully verified you can now proceed to the car park.'
-                      : 'Your ticket(s) have been expired or used',
+                  content,
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 16),
                 ),
@@ -60,19 +64,22 @@ class QrCodeResultScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(5),
                               margin: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
-                                  color: Colors.green,
+                                  color: isSuccessful
+                                      ? Colors.green
+                                      : Colors.orange,
                                   borderRadius: BorderRadius.circular(5)),
                               child: SvgPicture.asset(
                                 "assets/images/seat 2.svg",
                               ),
                             ),
                             Container(
-                              // margin: const EdgeInsets.all(5),
                               child: Text(
                                 "Seat $e",
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.black,
+                                    color: isSuccessful
+                                        ? Colors.green
+                                        : Colors.orange,
                                     fontSize: 12),
                               ),
                             ),
@@ -85,9 +92,10 @@ class QrCodeResultScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pop(context);
                   navController.changeIndex(0);
-                  qrController.controller!.stopCamera();
+                  Get.back();
+                  Get.back();
+                  qrController.qrcontroller!.stopCamera();
                 },
                 child: const Text('Back to home'),
               )
