@@ -5,6 +5,8 @@ import 'package:car_ticket/domain/repositories/user/driver_repository_imp.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+enum DriverStatus { edit, delete }
+
 class DriverController extends GetxController {
   DriverRepositoryImp driverRepository = Get.put(DriverRepositoryImp());
 
@@ -19,7 +21,14 @@ class DriverController extends GetxController {
 
   bool isDriverCreating = false;
   bool isGettingDrivers = false;
+  bool isDriverDeleting = false;
+  bool isDriverUpdating = false;
+
+  String deleteDriverId = "";
+  String updateDriverId = "";
   List<CarDriver> drivers = [];
+
+  DriverStatus? selectedItem;
 
   @override
   void onInit() {
@@ -55,6 +64,52 @@ class DriverController extends GetxController {
       update();
     } catch (e) {
       isGettingDrivers = false;
+      update();
+      rethrow;
+    }
+  }
+
+  changeDriverStatus(DriverStatus status) {
+    selectedItem = status;
+    update();
+  }
+
+  Future deleteDriver(CarDriver driver) async {
+    isDriverDeleting = true;
+    deleteDriverId = driver.id;
+    update();
+    try {
+      await driverRepository.deleteDriver(driver);
+      await getDrivers();
+      Get.snackbar("Driver Deleted", "Driver has been deleted successfully",
+          snackPosition: SnackPosition.BOTTOM);
+      isDriverDeleting = false;
+      deleteDriverId = "";
+      update();
+    } catch (e) {
+      isDriverDeleting = false;
+      deleteDriverId = "";
+      update();
+      rethrow;
+    }
+  }
+
+  Future updateDriver(CarDriver driver) async {
+    isDriverUpdating = true;
+    updateDriverId = driver.id;
+    update();
+    try {
+      await driverRepository.updateDriver(driver);
+      await getDrivers();
+      Get.back();
+      Get.snackbar("Driver Updated", "Driver has been updated successfully",
+          snackPosition: SnackPosition.BOTTOM);
+      isDriverUpdating = false;
+      updateDriverId = "";
+      update();
+    } catch (e) {
+      isDriverUpdating = false;
+      updateDriverId = "";
       update();
       rethrow;
     }

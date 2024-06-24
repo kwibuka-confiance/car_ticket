@@ -19,6 +19,7 @@ class PaymentsScreen extends StatelessWidget {
                       title: const Text('Payments'),
                       floating: true,
                       snap: true,
+                      pinned: true,
                       centerTitle: true,
                       backgroundColor: Theme.of(context).primaryColor,
                       expandedHeight: 200,

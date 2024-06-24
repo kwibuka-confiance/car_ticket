@@ -39,6 +39,24 @@ class MyUser extends Equatable {
         id: entity.id, email: entity.email, name: entity.name, photoUrl: null);
   }
 
+  factory MyUser.fromDocument(Map<String, dynamic> data) {
+    return MyUser(
+      id: data['id'],
+      email: data['email'],
+      name: data['name'],
+      photoUrl: data['photoUrl'],
+    );
+  }
+
+  Map<String, dynamic> toDocument() {
+    return {
+      'id': id,
+      'email': email,
+      'name': name,
+      'photoUrl': photoUrl,
+    };
+  }
+
   @override
   List<Object?> get props => [id, email, name, photoUrl];
 }

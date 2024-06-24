@@ -7,6 +7,7 @@ import 'package:car_ticket/presentation/screens/main_screen/dashboard/dashboard.
 import 'package:car_ticket/presentation/screens/main_screen/dashboard/destination/destinations.dart';
 import 'package:car_ticket/presentation/screens/main_screen/dashboard/driver/drivers.dart';
 import 'package:car_ticket/presentation/screens/main_screen/dashboard/payments.dart';
+import 'package:car_ticket/presentation/screens/main_screen/dashboard/report/report_screen.dart';
 import 'package:car_ticket/presentation/screens/main_screen/dashboard/users.dart';
 import 'package:car_ticket/presentation/screens/main_screen/navigations.dart';
 import 'package:car_ticket/presentation/screens/onboarding/onboard_screen.dart';
@@ -84,6 +85,8 @@ class MyApp extends StatelessWidget {
                     const PaymentSuccessScreen(),
                 PaymentsScreen.routeName: (context) => const PaymentsScreen(),
                 MyTicketScreen.routeName: (context) => const MyTicketScreen(),
+                DashboardReportScreen.routeName: (context) =>
+                    const DashboardReportScreen(),
               });
         });
   }

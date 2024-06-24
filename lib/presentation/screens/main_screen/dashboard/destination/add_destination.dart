@@ -3,6 +3,7 @@ import 'package:car_ticket/domain/models/destination/journey_destination.dart';
 import 'package:car_ticket/presentation/widgets/custom_textfields_decoration.dart';
 import 'package:car_ticket/presentation/widgets/main_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
@@ -16,11 +17,11 @@ class AddDestination extends StatelessWidget {
         init: JourneyDestinationController(),
         builder: (JourneyDestinationController destinationController) {
           return Container(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
             child: Wrap(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(bottom: 20),
+                  padding: EdgeInsets.only(bottom: 20.h),
                   child: Text(
                     "Add Destination",
                     style: Theme.of(context).textTheme.titleLarge,
@@ -31,18 +32,18 @@ class AddDestination extends StatelessWidget {
                   children: [
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.h),
                       decoration: BoxDecoration(
                           border: Border.all(
                               color: Colors.grey.shade400,
-                              width: 1.5,
+                              width: 1.5.w,
                               style: BorderStyle.solid),
-                          borderRadius: BorderRadius.circular(10)),
+                          borderRadius: BorderRadius.circular(10.r)),
                       child: DropdownButton<String>(
                         value: destinationController.selectedDestination,
                         isExpanded: true,
                         icon: const Icon(Icons.arrow_downward),
-                        iconSize: 16,
+                        iconSize: 16.sp,
                         elevation: 16,
                         hint: const Text("Select Destination"),
                         style: const TextStyle(
@@ -60,19 +61,19 @@ class AddDestination extends StatelessWidget {
                             child: Row(
                               children: [
                                 CircleAvatar(
-                                  radius: 14,
+                                  radius: 14.r,
                                   backgroundColor:
                                       Theme.of(context).colorScheme.secondary,
                                   foregroundColor: Colors.white,
                                   child: Text(
                                     value.name.substring(0, 1),
-                                    style: const TextStyle(
-                                        fontSize: 12,
+                                    style: TextStyle(
+                                        fontSize: 12.sp,
                                         fontWeight: FontWeight.w600),
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 10,
+                                SizedBox(
+                                  width: 10.w,
                                 ),
                                 Text(
                                   value.name,
@@ -83,7 +84,7 @@ class AddDestination extends StatelessWidget {
                         }).toList(),
                       ),
                     ),
-                    const Gap(10),
+                    Gap(10.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -108,6 +109,7 @@ class AddDestination extends StatelessWidget {
                     TextFormField(
                         controller: destinationController.priceController,
                         keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
                         decoration: customTextFieldDecoration(
                             labelText: "Price",
                             hintText: "Price",
@@ -115,29 +117,15 @@ class AddDestination extends StatelessWidget {
                     const Gap(15),
                     TextFormField(
                         controller: destinationController.durationController,
+                        textInputAction: TextInputAction.done,
                         decoration: customTextFieldDecoration(
                             labelText: "Duration",
                             hintText: "Duration",
                             context: context)),
                     const Gap(15),
-                    // TextFormField(
-                    //     controller: destinationController.startDateController,
-                    //     decoration: customTextFieldDecoration(
-                    //         labelText: "Start Date",
-                    //         hintText: "Start Date",
-                    //         context: context)),
-                    // const Gap(15),
-                    // TextFormField(
-                    //     controller:
-                    //         destinationController.availableSeatsController,
-                    //     decoration: customTextFieldDecoration(
-                    //         labelText: "Available Seats",
-                    //         hintText: "Available Seats",
-                    //         context: context)),
-                    const Gap(15),
                     Container(
-                      padding: const EdgeInsets.only(
-                          left: 20, right: 20, bottom: 20, top: 10),
+                      padding: EdgeInsets.only(
+                          left: 20.w, right: 20.w, bottom: 20.h, top: 10.h),
                       child: MainButton(
                           isColored: true,
                           isLoading:

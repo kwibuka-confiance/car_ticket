@@ -1,7 +1,8 @@
 import 'package:car_ticket/controller/dashboard/driver_controller.dart';
 import 'package:car_ticket/presentation/screens/main_screen/dashboard/driver/add_driver.dart';
-import 'package:car_ticket/presentation/widgets/dashboard/user_card.dart';
+import 'package:car_ticket/presentation/widgets/dashboard/driver_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class DriversScreen extends StatelessWidget {
@@ -17,6 +18,7 @@ class DriversScreen extends StatelessWidget {
             title: const Text('Drivers'),
             floating: true,
             snap: true,
+            pinned: true,
             backgroundColor: Theme.of(context).primaryColor,
             expandedHeight: 200,
             foregroundColor: Colors.white,
@@ -34,12 +36,18 @@ class DriversScreen extends StatelessWidget {
                 child: Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 10.w),
                         child: TextButton.icon(
                           onPressed: () => showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,
-                            builder: (context) => const AddDriver(),
+                            builder: (context) => Padding(
+                                padding: EdgeInsets.only(
+                                    bottom: MediaQuery.of(context)
+                                        .viewInsets
+                                        .bottom),
+                                child: const AddDriver()),
                           ),
                           icon: const Icon(Icons.add, color: Colors.white),
                           label: const Text('Add Driver',
@@ -66,23 +74,28 @@ class DriversScreen extends StatelessWidget {
                         ? const Center(
                             child: CircularProgressIndicator(),
                           )
-                        : Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: driverController.drivers.length,
-                                itemBuilder: (context, index) {
-                                  final driver =
-                                      driverController.drivers[index];
-                                  return UserItem(
-                                    firstName: driver.firstName,
-                                    lastName: driver.lastName,
-                                    email: driver.email,
-                                    phone: driver.phone,
-                                  );
-                                }),
-                          );
+                        : driverController.drivers.isEmpty
+                            ? const SizedBox(
+                                height: 200,
+                                child: Center(
+                                    child: Text('No drivers found! Add one.')),
+                              )
+                            : Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemCount: driverController.drivers.length,
+                                    itemBuilder: (context, index) {
+                                      final driver =
+                                          driverController.drivers[index];
+                                      return DriverItem(
+                                        driver: driver,
+                                      );
+                                    }),
+                              );
                   }),
             ],
           ),

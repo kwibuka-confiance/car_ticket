@@ -1,5 +1,7 @@
+import 'package:car_ticket/controller/dashboard/customers.dart';
 import 'package:car_ticket/presentation/widgets/dashboard/user_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
 class UsersScreen extends StatelessWidget {
   static const String routeName = '/users';
@@ -14,6 +16,7 @@ class UsersScreen extends StatelessWidget {
             title: const Text('Users'),
             floating: true,
             snap: true,
+            pinned: true,
             backgroundColor: Theme.of(context).primaryColor,
             expandedHeight: 200,
             foregroundColor: Colors.white,
@@ -52,20 +55,22 @@ class UsersScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return const UserItem(
-                          firstName: "Kwibuka",
-                          lastName: "Confiance",
-                          email: "djconfiance",
-                          phone: "+25078239102");
-                    }),
-              ),
+              GetBuilder(
+                  init: CustomersController(),
+                  builder: (customersController) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: customersController.customers.length,
+                          itemBuilder: (context, index) {
+                            return UserItem(
+                              customer: customersController.customers[index],
+                            );
+                          }),
+                    );
+                  }),
             ],
           ),
         ),

@@ -3,6 +3,7 @@ import 'package:car_ticket/domain/models/car/car.dart';
 import 'package:car_ticket/presentation/widgets/custom_textfields_decoration.dart';
 import 'package:car_ticket/presentation/widgets/main_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:uuid/uuid.dart';
@@ -18,7 +19,7 @@ class AddCar extends StatelessWidget {
           return Wrap(
             children: [
               Container(
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
                 child: Form(
                   key: carController.carformKey,
                   child: Column(
@@ -29,35 +30,35 @@ class AddCar extends StatelessWidget {
                               labelText: "Name",
                               hintText: "Name",
                               context: context)),
-                      const Gap(15),
+                      Gap(15.h),
                       TextFormField(
                           controller: carController.plateNumberController,
                           decoration: customTextFieldDecoration(
                               labelText: "Plate Number",
                               hintText: "Plate Number",
                               context: context)),
-                      const Gap(15),
+                      Gap(15.h),
                       TextFormField(
                           controller: carController.colorController,
                           decoration: customTextFieldDecoration(
                               labelText: "Color",
                               hintText: "Color",
                               context: context)),
-                      const Gap(15),
+                      Gap(15.h),
                       TextFormField(
                           controller: carController.modelController,
                           decoration: customTextFieldDecoration(
                               labelText: "Model",
                               hintText: "Model",
                               context: context)),
-                      const Gap(15),
+                      Gap(15.h),
                       TextFormField(
                           controller: carController.yearController,
                           decoration: customTextFieldDecoration(
                               labelText: "Year",
                               hintText: "Year",
                               context: context)),
-                      const Gap(15),
+                      Gap(15.h),
                       MainButton(
                         isColored: true,
                         title: "Add Car",

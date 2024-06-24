@@ -17,6 +17,7 @@ class CarsScreen extends StatelessWidget {
             title: const Text('Cars'),
             floating: true,
             snap: true,
+            pinned: true,
             backgroundColor: Theme.of(context).primaryColor,
             expandedHeight: 200,
             foregroundColor: Colors.white,
@@ -39,7 +40,12 @@ class CarsScreen extends StatelessWidget {
                           onPressed: () => showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,
-                            builder: (context) => const AddCar(),
+                            builder: (context) => Padding(
+                              padding: EdgeInsets.only(
+                                  bottom:
+                                      MediaQuery.of(context).viewInsets.bottom),
+                              child: const AddCar(),
+                            ),
                           ),
                           icon: const Icon(Icons.add, color: Colors.white),
                           label: const Text('Add Car',

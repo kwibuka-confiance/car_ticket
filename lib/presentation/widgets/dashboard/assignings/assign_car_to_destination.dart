@@ -2,6 +2,7 @@ import 'package:car_ticket/controller/dashboard/car_controller.dart';
 import 'package:car_ticket/controller/dashboard/journey_destination_controller.dart';
 import 'package:car_ticket/domain/models/destination/journey_destination.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class AddCarToDestination extends StatelessWidget {
@@ -16,11 +17,12 @@ class AddCarToDestination extends StatelessWidget {
         init: CarController(),
         builder: (CarController carController) {
           return Container(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
             child: Wrap(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(20),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
                   child: Text(
                     "Add Car to Destination",
                     style: Theme.of(context).textTheme.titleLarge,
@@ -28,9 +30,9 @@ class AddCarToDestination extends StatelessWidget {
                 ),
                 carController.isGettingCars ||
                         destinationController.isAssigningCar
-                    ? const SizedBox(
-                        height: 130,
-                        child: Center(
+                    ? SizedBox(
+                        height: 130.h,
+                        child: const Center(
                           child: CircularProgressIndicator(),
                         ),
                       )
@@ -45,7 +47,7 @@ class AddCarToDestination extends StatelessWidget {
                             );
                           }
                           return Container(
-                            margin: const EdgeInsets.only(bottom: 20),
+                            margin: EdgeInsets.only(bottom: 20.h),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,9 +64,9 @@ class AddCarToDestination extends StatelessWidget {
                                     ),
                                     Row(
                                       children: [
-                                        const Icon(
+                                        Icon(
                                           Icons.person,
-                                          size: 15,
+                                          size: 15.sp,
                                         ),
                                         Text(
                                             " ${carController.cars[item].color}"),
@@ -72,14 +74,15 @@ class AddCarToDestination extends StatelessWidget {
                                     ),
                                     Text(
                                         "Plate Number: ${carController.cars[item].plateNumber}",
-                                        style: const TextStyle(fontSize: 10)),
+                                        style: TextStyle(fontSize: 10.sp)),
                                   ],
                                 ),
                                 destinationController.isAssigningCar
-                                    ? const SizedBox(
-                                        height: 20,
-                                        width: 20,
-                                        child: CircularProgressIndicator(),
+                                    ? SizedBox(
+                                        height: 20.h,
+                                        width: 20.w,
+                                        child:
+                                            const CircularProgressIndicator(),
                                       )
                                     : ElevatedButton(
                                         onPressed: destination.carId ==

@@ -1,9 +1,10 @@
 import 'package:car_ticket/controller/setting/edit_profile_controller.dart';
+import 'package:car_ticket/controller/setting/setting_controller.dart';
 import 'package:car_ticket/presentation/widgets/custom_appbar.dart';
 import 'package:car_ticket/presentation/widgets/custom_textfields_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UserProfileScreen extends StatelessWidget {
@@ -12,6 +13,7 @@ class UserProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingController settingController = Get.put(SettingController());
     return GetBuilder(
         init: EditProfileController(),
         builder: (editProfileController) {
@@ -57,7 +59,8 @@ class UserProfileScreen extends StatelessWidget {
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: const Color.fromARGB(255, 124, 4, 4),
+                                    color: const Color.fromARGB(
+                                        255, 215, 215, 215),
                                     border: const Border.fromBorderSide(
                                         BorderSide(
                                             color: Colors.white, width: 2)),
@@ -134,6 +137,7 @@ class UserProfileScreen extends StatelessWidget {
                                   controller:
                                       editProfileController.emailController,
                                   // initialValue: user.email,
+                                  enabled: false,
                                   style: TextStyle(
                                       fontFamily:
                                           GoogleFonts.roboto().fontFamily,

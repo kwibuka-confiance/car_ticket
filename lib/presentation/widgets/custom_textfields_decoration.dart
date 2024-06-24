@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 InputDecoration customTextFieldDecoration(
@@ -6,12 +7,11 @@ InputDecoration customTextFieldDecoration(
     required String hintText,
     required BuildContext context}) {
   return InputDecoration(
-      contentPadding:
-          const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10.0),
+      contentPadding: EdgeInsets.symmetric(vertical: 3.0.h, horizontal: 10.0.w),
       labelText: labelText,
       hintText: hintText,
       border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(10.0.r),
           borderSide: BorderSide(
             color: Colors.grey.withOpacity(0.3),
             width: 1.0,
@@ -23,15 +23,15 @@ InputDecoration customTextFieldDecorationWhite(
     required String hintText,
     required BuildContext context}) {
   return InputDecoration(
-      contentPadding: const EdgeInsets.all(3.0),
+      contentPadding: EdgeInsets.symmetric(vertical: 3.0.h, horizontal: 10.0.w),
       labelText: labelText,
       hintText: hintText,
       fillColor: Colors.white,
       border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: const BorderSide(
+          borderRadius: BorderRadius.circular(10.0.r),
+          borderSide: BorderSide(
             color: Colors.white,
-            width: 1.0,
+            width: 1.0.w,
           )));
 }
 
@@ -41,7 +41,7 @@ InputDecoration customTextFieldDecorationUnLabeled(
     required BuildContext context}) {
   return InputDecoration(
       // labelText: labelText,
-      contentPadding: const EdgeInsets.all(3.0),
+      contentPadding: EdgeInsets.symmetric(vertical: 3.0.h, horizontal: 10.0.w),
       labelStyle: TextStyle(
         color: Colors.grey.withOpacity(0.3),
         fontFamily: GoogleFonts.roboto().fontFamily,
@@ -54,9 +54,9 @@ InputDecoration customTextFieldDecorationUnLabeled(
         fontWeight: FontWeight.normal,
       ),
       border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(10.0.r),
           borderSide: BorderSide(
             color: Theme.of(context).colorScheme.secondary,
-            width: 1.0,
+            width: 1.0.h,
           )));
 }

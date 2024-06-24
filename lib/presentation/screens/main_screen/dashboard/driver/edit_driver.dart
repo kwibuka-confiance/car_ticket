@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:uuid/uuid.dart';
 
-class AddDriver extends StatelessWidget {
-  const AddDriver({super.key});
+class UpdateDriverWidget extends StatelessWidget {
+  final CarDriver driver;
+  const UpdateDriverWidget({required this.driver, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class AddDriver extends StatelessWidget {
               Container(
                 padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
                 child: Text(
-                  "Add Driver",
+                  "Update Driver",
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
@@ -32,61 +32,82 @@ class AddDriver extends StatelessWidget {
                     child: Column(
                       children: [
                         TextFormField(
-                            controller: driverController.firstNameController,
-                            textInputAction: TextInputAction.next,
-                            decoration: customTextFieldDecoration(
-                                labelText: "First Name",
-                                hintText: "First Name",
-                                context: context)),
+                          initialValue: driver.firstName,
+                          textInputAction: TextInputAction.next,
+                          decoration: customTextFieldDecoration(
+                              labelText: "First Name",
+                              hintText: "First Name",
+                              context: context),
+                          onChanged: (value) {
+                            driverController.firstNameController.text = value;
+                          },
+                        ),
                         Gap(15.h),
                         TextFormField(
-                            controller: driverController.lastNameController,
-                            textInputAction: TextInputAction.next,
+                            initialValue: driver.lastName,
                             decoration: customTextFieldDecoration(
                                 labelText: "Last Name",
                                 hintText: "Last Name",
-                                context: context)),
+                                context: context),
+                            onChanged: (value) {
+                              driverController.lastNameController.text = value;
+                            }),
                         Gap(15.h),
                         TextFormField(
-                            controller: driverController.emailController,
+                            initialValue: driver.email,
                             textInputAction: TextInputAction.next,
                             decoration: customTextFieldDecoration(
                                 labelText: "Email",
                                 hintText: "Email",
-                                context: context)),
+                                context: context),
+                            onChanged: (value) {
+                              driverController.emailController.text = value;
+                            }),
                         Gap(15.h),
                         TextFormField(
-                            controller: driverController.phoneController,
+                            initialValue: driver.phone,
                             textInputAction: TextInputAction.next,
                             decoration: customTextFieldDecoration(
                                 labelText: "Phone",
                                 hintText: "Phone",
-                                context: context)),
+                                context: context),
+                            onChanged: (value) {
+                              driverController.phoneController.text = value;
+                            }),
                         Gap(15.h),
                         TextFormField(
-                            controller: driverController.addressController,
+                            initialValue: driver.address,
                             textInputAction: TextInputAction.next,
                             decoration: customTextFieldDecoration(
                                 labelText: "Address",
                                 hintText: "Address",
-                                context: context)),
+                                context: context),
+                            onChanged: (value) {
+                              driverController.addressController.text = value;
+                            }),
                         Gap(15.h),
                         TextFormField(
-                            controller: driverController.cityController,
+                            initialValue: driver.city,
                             textInputAction: TextInputAction.next,
                             decoration: customTextFieldDecoration(
                                 labelText: "City",
                                 hintText: "City",
-                                context: context)),
+                                context: context),
+                            onChanged: (value) {
+                              driverController.cityController.text = value;
+                            }),
                         Gap(15.h),
                         TextFormField(
-                            controller: driverController
-                                .driverLicenseCategoryController,
+                            initialValue: driver.driverLicenseCategory,
                             textInputAction: TextInputAction.done,
                             decoration: customTextFieldDecoration(
                                 labelText: "Driver License Category",
                                 hintText: "Driver License Category",
-                                context: context)),
+                                context: context),
+                            onChanged: (value) {
+                              driverController
+                                  .driverLicenseCategoryController.text = value;
+                            }),
                       ],
                     )),
               ),
@@ -94,12 +115,11 @@ class AddDriver extends StatelessWidget {
                 padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.h),
                 child: MainButton(
                     isColored: true,
-                    isLoading: driverController.isDriverCreating,
-                    isDisabled: driverController.isDriverCreating,
+                    isLoading: driverController.isDriverUpdating,
+                    isDisabled: driverController.isDriverUpdating,
                     onPressed: () {
-                      const uuid = Uuid();
-                      CarDriver driver = CarDriver(
-                          id: uuid.v1(),
+                      CarDriver updatedDriver = CarDriver(
+                          id: driver.id,
                           firstName: driverController.firstNameController.text,
                           lastName: driverController.lastNameController.text,
                           email: driverController.emailController.text,
@@ -114,10 +134,10 @@ class AddDriver extends StatelessWidget {
                       if (driverController.formKey.currentState!.validate()) {
                         // print("driver: $driver");
 
-                        driverController.addDriver(driver);
+                        driverController.updateDriver(updatedDriver);
                       }
                     },
-                    title: "Add Driver"),
+                    title: "Update Driver"),
               )
             ],
           );

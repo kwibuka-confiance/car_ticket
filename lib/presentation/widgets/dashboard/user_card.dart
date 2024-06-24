@@ -1,17 +1,10 @@
+import 'package:car_ticket/domain/models/user/user.dart';
 import 'package:flutter/material.dart';
 
 class UserItem extends StatelessWidget {
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String phone;
+  final MyUser customer;
 
-  const UserItem(
-      {required this.firstName,
-      required this.lastName,
-      required this.email,
-      required this.phone,
-      super.key});
+  const UserItem({required this.customer, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +15,8 @@ class UserItem extends StatelessWidget {
           children: [
             ListTile(
               leading: const Icon(Icons.person),
-              title: Text('$firstName $lastName'),
-              subtitle: Text(email),
-              trailing: Text(phone),
+              title: Text(customer.name),
+              subtitle: Text(customer.email),
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),

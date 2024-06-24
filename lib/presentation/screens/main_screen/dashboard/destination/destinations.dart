@@ -3,6 +3,7 @@ import 'package:car_ticket/domain/models/destination/journey_destination.dart';
 import 'package:car_ticket/presentation/screens/main_screen/dashboard/destination/add_destination.dart';
 import 'package:car_ticket/presentation/widgets/dashboard/journey_destination.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class DestinationsScreen extends StatelessWidget {
@@ -15,7 +16,7 @@ class DestinationsScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 200.0,
+            expandedHeight: 200.0.h,
             floating: false,
             pinned: true,
             flexibleSpace: Container(
@@ -32,12 +33,18 @@ class DestinationsScreen extends StatelessWidget {
                 child: Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 10.w),
                         child: TextButton.icon(
                           onPressed: () => showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,
-                            builder: (context) => const AddDestination(),
+                            builder: (context) => Padding(
+                              padding: EdgeInsets.only(
+                                  bottom:
+                                      MediaQuery.of(context).viewInsets.bottom),
+                              child: const AddDestination(),
+                            ),
                           ),
                           icon: const Icon(Icons.add, color: Colors.white),
                           label: const Text('Add Destination',
@@ -48,12 +55,12 @@ class DestinationsScreen extends StatelessWidget {
             delegate: SliverChildListDelegate([
               Container(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
-                child: const Row(
+                    EdgeInsets.symmetric(vertical: 20.0.h, horizontal: 20.w),
+                child: Row(
                   children: [
                     Text('All Destinations',
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
+                            fontSize: 20.sp, fontWeight: FontWeight.bold)),
                   ],
                 ),
               ),
@@ -67,7 +74,7 @@ class DestinationsScreen extends StatelessWidget {
                           )
                         : destinationController.destinations.isEmpty
                             ? SizedBox(
-                                height: 200,
+                                height: 200.h,
                                 width: MediaQuery.of(context).size.width,
                                 child: const Center(
                                   child: Text('No Destinations Found'),

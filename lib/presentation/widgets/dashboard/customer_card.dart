@@ -1,7 +1,9 @@
+import 'package:car_ticket/domain/models/user/user.dart';
 import 'package:flutter/material.dart';
 
 class CustomerItem extends StatelessWidget {
-  const CustomerItem({super.key});
+  final MyUser customer;
+  const CustomerItem({required this.customer, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,25 +12,24 @@ class CustomerItem extends StatelessWidget {
       child: Card(
         child: Column(
           children: [
-            const ListTile(
-              leading: Icon(Icons.person),
-              title: Text('Kwibuka Confiance'),
-              subtitle: Text('dconfy@gmail.com'),
-              trailing: Text('0783492031'),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: Text(customer.name),
+              subtitle: Text(customer.email),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 8.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('View Profile'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('View Tickets'),
-                  ),
+                  // ElevatedButton(
+                  //   onPressed: () {},
+                  //   child: const Text('View Profile'),
+                  // ),
+                  // ElevatedButton(
+                  //   onPressed: () {},
+                  //   child: const Text('View Tickets'),
+                  // ),
                 ],
               ),
             )

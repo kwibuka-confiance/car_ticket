@@ -55,7 +55,7 @@ class DashboardItemsList {
 
   static List<DashboardItemsList> dashboardItemsList = [
     DashboardItemsList(
-        title: 'Users',
+        title: 'Customers',
         icon: Icons.person,
         color: Colors.blue,
         routeName: UsersScreen.routeName),

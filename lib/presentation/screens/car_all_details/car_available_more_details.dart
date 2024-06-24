@@ -17,13 +17,13 @@ class CarAvailableDetails extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
         foregroundColor: Colors.white,
-        actions: [
-          IconButton(
-            onPressed: () {
-              // Navigator.pop(context);
-            },
-            icon: const Icon(Icons.more_vert_outlined),
-          )
+        actions: const [
+          // IconButton(
+          //   onPressed: () {
+          //     // Navigator.pop(context);
+          //   },
+          //   icon: const Icon(Icons.more_vert_outlined),
+          // )
         ],
       ),
       body: GetBuilder(

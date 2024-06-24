@@ -1,6 +1,7 @@
 import 'package:car_ticket/domain/models/destination/journey_destination.dart';
 import 'package:car_ticket/presentation/widgets/dashboard/assignings/assign_car_to_destination.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DestinationCard extends StatelessWidget {
   final JourneyDestination destination;
@@ -17,8 +18,8 @@ class DestinationCard extends StatelessWidget {
           children: [
             Text("${destination.price} Rwf"),
             Text("${destination.from} to ${destination.to}"),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
             Row(
               children: [
@@ -34,8 +35,8 @@ class DestinationCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
           ],
         ),
