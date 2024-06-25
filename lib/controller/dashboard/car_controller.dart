@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 
+enum CarStatus { edit, delete }
+
 class CarController extends GetxController {
   CarRepositoryImp carRepository = Get.put(CarRepositoryImp());
   final carformKey = GlobalKey<FormState>();
@@ -23,6 +25,12 @@ class CarController extends GetxController {
 
   bool isCarCreating = false;
   bool isGettingCars = false;
+  bool isCarDeleting = false;
+  bool isUpdatingCar = false;
+
+  String deleteCarId = '';
+
+  CarStatus? selectedItem;
   List<ExcelCar> cars = [];
   List<Seat> selectedSeats = [];
 
@@ -30,6 +38,11 @@ class CarController extends GetxController {
   void onInit() {
     getCars();
     super.onInit();
+  }
+
+  void changeCarStatus(CarStatus? status) {
+    selectedItem = status;
+    update();
   }
 
   Future addCar(ExcelCar car) async {
@@ -125,5 +138,43 @@ class CarController extends GetxController {
 
     isDownloadingQrCode = false;
     update();
+  }
+
+  Future deleteCar(ExcelCar car) async {
+    isCarDeleting = true;
+    deleteCarId = car.id;
+    update();
+    try {
+      await carRepository.deleteCar(car);
+      await getCars();
+      Get.snackbar("Car Deleted", "Car has been deleted successfully",
+          snackPosition: SnackPosition.BOTTOM);
+      isCarDeleting = false;
+      deleteCarId = '';
+      update();
+    } catch (e) {
+      isCarDeleting = false;
+      deleteCarId = '';
+      update();
+      rethrow;
+    }
+  }
+
+  Future updateCar(ExcelCar car) async {
+    isUpdatingCar = true;
+    update();
+    try {
+      await carRepository.updateCar(car);
+      await getCars();
+      Get.back();
+      Get.snackbar("Car Updated", "Car has been updated successfully",
+          snackPosition: SnackPosition.BOTTOM);
+      isUpdatingCar = false;
+      update();
+    } catch (e) {
+      isUpdatingCar = false;
+      update();
+      rethrow;
+    }
   }
 }

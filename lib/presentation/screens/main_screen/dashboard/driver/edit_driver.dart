@@ -119,21 +119,37 @@ class UpdateDriverWidget extends StatelessWidget {
                     isDisabled: driverController.isDriverUpdating,
                     onPressed: () {
                       CarDriver updatedDriver = CarDriver(
-                          id: driver.id,
-                          firstName: driverController.firstNameController.text,
-                          lastName: driverController.lastNameController.text,
-                          email: driverController.emailController.text,
-                          phone: driverController.phoneController.text,
-                          address: driverController.addressController.text,
-                          city: driverController.cityController.text,
-                          driverLicenseCategory: driverController
-                              .driverLicenseCategoryController.text,
-                          isAssigned: false,
-                          sexStatus: "Not Specified");
+                        id: driver.id,
+                        firstName:
+                            driverController.firstNameController.text.isEmpty
+                                ? driver.firstName
+                                : driverController.firstNameController.text,
+                        lastName:
+                            driverController.lastNameController.text.isEmpty
+                                ? driver.lastName
+                                : driverController.lastNameController.text,
+                        email: driverController.emailController.text.isEmpty
+                            ? driver.email
+                            : driverController.emailController.text,
+                        phone: driverController.phoneController.text.isEmpty
+                            ? driver.phone
+                            : driverController.phoneController.text,
+                        address: driverController.addressController.text.isEmpty
+                            ? driver.address
+                            : driverController.addressController.text,
+                        city: driverController.cityController.text.isEmpty
+                            ? driver.city
+                            : driverController.cityController.text,
+                        driverLicenseCategory: driverController
+                                .driverLicenseCategoryController.text.isEmpty
+                            ? driver.driverLicenseCategory
+                            : driverController
+                                .driverLicenseCategoryController.text,
+                        isAssigned: driver.isAssigned,
+                        sexStatus: driver.sexStatus,
+                      );
 
                       if (driverController.formKey.currentState!.validate()) {
-                        // print("driver: $driver");
-
                         driverController.updateDriver(updatedDriver);
                       }
                     },
