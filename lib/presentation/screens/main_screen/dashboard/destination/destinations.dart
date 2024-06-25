@@ -36,16 +36,19 @@ class DestinationsScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                             vertical: 10.h, horizontal: 10.w),
                         child: TextButton.icon(
-                          onPressed: () => showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            builder: (context) => Padding(
-                              padding: EdgeInsets.only(
-                                  bottom:
-                                      MediaQuery.of(context).viewInsets.bottom),
-                              child: const AddDestination(),
-                            ),
-                          ),
+                          onPressed: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              builder: (context) => Padding(
+                                padding: EdgeInsets.only(
+                                    bottom: MediaQuery.of(context)
+                                        .viewInsets
+                                        .bottom),
+                                child: const AddDestination(),
+                              ),
+                            );
+                          },
                           icon: const Icon(Icons.add, color: Colors.white),
                           label: const Text('Add Destination',
                               style: TextStyle(color: Colors.white)),
@@ -80,18 +83,23 @@ class DestinationsScreen extends StatelessWidget {
                                   child: Text('No Destinations Found'),
                                 ),
                               )
-                            : ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount:
-                                    destinationController.destinations.length,
-                                itemBuilder: (context, index) {
-                                  JourneyDestination destination =
-                                      destinationController.destinations[index];
-                                  return DestinationCard(
-                                    destination: destination,
-                                  );
-                                },
+                            : Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 20.0.w),
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount:
+                                      destinationController.destinations.length,
+                                  itemBuilder: (context, index) {
+                                    JourneyDestination destination =
+                                        destinationController
+                                            .destinations[index];
+                                    return DestinationCard(
+                                      destination: destination,
+                                    );
+                                  },
+                                ),
                               );
                   }),
             ]),

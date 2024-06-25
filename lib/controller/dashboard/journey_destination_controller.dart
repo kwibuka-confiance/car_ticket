@@ -3,11 +3,15 @@ import 'package:car_ticket/domain/repositories/destination_repository/destinatio
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+enum JourneyDestinationStatus { edit, delete }
+
 class JourneyDestinationController extends GetxController {
   JourneyDestinationImp journeyRepository = Get.put(JourneyDestinationImp());
   bool isGettingDestinations = false;
   bool isDestinationCreating = false;
   bool isAssigningCar = false;
+  String deleteDestinationId = '';
+  bool isDestinationDeleting = false;
 
   List<JourneyDestination> destinations = [];
 
@@ -19,6 +23,8 @@ class JourneyDestinationController extends GetxController {
   // final toController = TextEditingController();
   // final startDateController = TextEditingController();
 
+  JourneyDestinationStatus? selectedItem;
+
   String? selectedDestination;
   String initialTime = "00:00";
   String finalTime = "00:00";
@@ -27,6 +33,11 @@ class JourneyDestinationController extends GetxController {
   void onInit() {
     getDestinations();
     super.onInit();
+  }
+
+  void changeDestinationStatus(JourneyDestinationStatus? status) {
+    selectedItem = status;
+    update();
   }
 
   Future createDestination(JourneyDestination destination) async {
@@ -44,9 +55,19 @@ class JourneyDestinationController extends GetxController {
   }
 
   Future deleteDestination(JourneyDestination destination) async {
+    isDestinationDeleting = true;
+    deleteDestinationId = destination.id;
+    update();
     try {
       await journeyRepository.deleteDestination(destination.id);
+      await getDestinations();
+      isDestinationDeleting = false;
+      deleteDestinationId = '';
+      update();
     } catch (e) {
+      isDestinationDeleting = false;
+      deleteDestinationId = '';
+      update();
       rethrow;
     }
   }
@@ -144,6 +165,20 @@ class JourneyDestinationController extends GetxController {
           snackPosition: SnackPosition.BOTTOM);
       rethrow;
     }
+  }
+
+  initializeItemsForEdit(JourneyDestination destination) {
+    selectedDestination = destination.description;
+    initialTime = destination.from;
+    finalTime = destination.to;
+    update();
+  }
+
+  clearInitializedItems() {
+    selectedDestination = null;
+    initialTime = "00:00";
+    finalTime = "00:00";
+    update();
   }
 
   selectedDestinationChange(String? value) {
