@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'car-ticket-app.appspot.com',
     measurementId: 'G-Y03XQP3JZ4',
   );
+
 }
